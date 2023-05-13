@@ -4,5 +4,5 @@ namespace Idk.Web.Controllers;
 
 public class BaseController : ControllerBase
 {
-    public int UserId => 10;
+    protected int UserId => 3;
 }

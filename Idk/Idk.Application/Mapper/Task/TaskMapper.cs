@@ -7,7 +7,7 @@ namespace Idk.Application.Mapper.Task;
 [DefaultTransientImplementation]
 public class TaskMapper : ITaskMapper
 {
-    public Domain.Models.Task Map(TaskDto source)
+    public Domain.Models.Task Map(int? subjectId, int userId, TaskDto source)
     {
         return new Domain.Models.Task
         {
@@ -17,8 +17,20 @@ public class TaskMapper : ITaskMapper
             Deadline = source.Deadline,
             Theme = source.Theme,
             Status = source.Status,
-            SubjectId = source.SubjectId
+            SubjectId = subjectId,
+            UserId = userId
         };
+    }
+
+    public void Map(int? subjectId, TaskDto source, Domain.Models.Task destination)
+    {
+        destination.Name = source.Name;
+        destination.SubjectId = subjectId;
+        destination.Description = source.Description;
+        destination.Deadline = source.Deadline;
+        destination.Grade = source.Grade;
+        destination.Theme = source.Theme;
+        destination.Status = source.Status;
     }
 
     public TaskModel Map(Domain.Models.Task source)

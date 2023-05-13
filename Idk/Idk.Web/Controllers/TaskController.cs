@@ -1,5 +1,8 @@
-﻿using Idk.Application.Model;
+﻿using Idk.Application.Dtos.Task;
+using Idk.Application.Model;
+using Idk.Application.Services.Task;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Idk.Web.Controllers;
 
@@ -7,33 +10,43 @@ namespace Idk.Web.Controllers;
 [Route("api/[controller]")]
 public class TaskController : BaseController
 {
-    [HttpGet("{id:int}")]
-    public async Task<TaskModel> GetTaskById(int id)
+    private readonly ITaskService _taskService;
+
+    public TaskController(ITaskService taskService)
     {
-        return null;
+        _taskService = taskService;
+    }
+    [HttpGet("{id:int}")]
+    [HttpGet("{subjectId:int}/{id:int}")]
+    public async Task<TaskModel> GetTaskById(int? subjectId, int id)
+    {
+        return await _taskService.GetTaskById(subjectId, UserId, id);
     }
 
     [HttpGet]
     public async Task<IEnumerable<TaskModel>> GetUserTasks()
     {
-        return null;
+        return await _taskService.GetUserTasks(UserId);
     }
 
     [HttpPost]
-    public async Task<TaskModel> CreateTask()
+    [HttpPost("{subjectId:int}")]
+    public async Task<TaskModel> CreateTask(TaskDto dto, int? subjectId)
     {
-        return null;
+        return await _taskService.CreateTask(subjectId, UserId, dto);
     }
 
     [HttpPut("{id:int}")]
-    public async Task<TaskModel> UpdateTask(int id)
+    [HttpPut("{subjectId:int}/{id:int}")]
+    public async Task<TaskModel> UpdateTask(int? subjectId, int id, TaskDto dto)
     {
-        return null;
+        return await _taskService.UpdateTask(subjectId, UserId, id, dto);
     }
     
     [HttpDelete("{id:int}")]
-    public async Task DeleteTask(int id)
+    [HttpDelete("{subjectId:int}/{id:int}")]
+    public async Task DeleteTask(int? subjectId, int id)
     {
-        
+        await _taskService.DeleteTaskById(subjectId, UserId, id);
     }
 }
