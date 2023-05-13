@@ -14,8 +14,6 @@ namespace Idk.Domain.Models
         public string? Description { get; set; }
         public float MaxGrade { get; set; }
         public DateTime Deadline { get; set; }
-        public DateTime CreatedOn { get; set; }
-        public DateTime UpdatedOn { get; set; }
         public User? User { get; set; }
         public int UserId { get; set; }
         public ICollection<Task>? Tasks { get; set; } = new List<Task>();

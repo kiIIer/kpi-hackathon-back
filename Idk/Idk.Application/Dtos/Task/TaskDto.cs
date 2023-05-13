@@ -4,7 +4,6 @@ namespace Idk.Application.Dtos.Task;
 public class TaskDto
 {
     public string Name { get; set; }
-    public int? SubjectId { get; set; }
     public DateTime? Deadline { get; set; }
     public string? Description { get; set; }
     public string? Theme { get; set; }

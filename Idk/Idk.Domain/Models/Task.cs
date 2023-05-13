@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Idk.Domain.Model;
 using TaskStatus = Idk.Domain.Model.TaskStatus;
 
 namespace Idk.Domain.Models
@@ -17,10 +18,9 @@ namespace Idk.Domain.Models
         public DateTime? Deadline { get; set; }
         [StringLength(100)]
         public string? Theme { get; set; }
+        public int? UserId { get; set; }
 
         public TaskStatus Status { get; set; } = TaskStatus.ToDo;
-        public DateTime CreatedOn { get; set; }
-        public DateTime UpdatedOn { get; set; }
         public Subject? Subject { get; set; }
         public int? SubjectId { get; set; }
     }

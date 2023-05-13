@@ -18,31 +18,5 @@ namespace Idk.Domain.Data
         {
             
         }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Subject>(entity =>
-            {
-                entity.Property(e => e.CreatedOn)
-                    .ValueGeneratedOnAdd();
-                entity.Property(e => e.UpdatedOn)
-                    .ValueGeneratedOnAddOrUpdate();
-            });
-            modelBuilder.Entity<Task>(entity =>
-            {
-                entity.Property(e => e.CreatedOn)
-                    .ValueGeneratedOnAdd();
-                entity.Property(e => e.UpdatedOn)
-                    .ValueGeneratedOnAddOrUpdate();
-            });
-            modelBuilder.Entity<User>(entity =>
-            {
-                entity.Property(e => e.CreatedOn)
-                    .ValueGeneratedOnAdd();
-                entity.Property(e => e.UpdatedOn)
-                    .ValueGeneratedOnAddOrUpdate();
-            });
-            base.OnModelCreating(modelBuilder);
-        }
     }
 }
