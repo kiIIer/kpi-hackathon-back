@@ -31,7 +31,7 @@ public class SubjectController : ControllerBase
         return null;
     }
 
-    [HttpDelete]
+    [HttpDelete("{id:int}")]
     public async Task DeleteSubject()
     {
         
