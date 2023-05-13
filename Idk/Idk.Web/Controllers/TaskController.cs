@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Idk.Web.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api")]
 public class TaskController : BaseController
 {
     private readonly ITaskService _taskService;
@@ -23,6 +23,11 @@ public class TaskController : BaseController
         return await _taskService.GetTaskById(subjectId, UserId, id);
     }
 
+    [HttpGet("tasks/hot")]
+    public async Task<IEnumerable<TaskModel>> GetHotTasks()
+    {
+        return await _taskService.GetHotTAsks(UserId);
+    }
     [HttpGet("tasks")]
     public async Task<IEnumerable<TaskModel>> GetUserTasks()
     {

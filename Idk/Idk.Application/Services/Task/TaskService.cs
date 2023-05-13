@@ -32,6 +32,11 @@ public class TaskService : ITaskService
         return _taskMapper.Map(task);
     }
 
+    public Task<IEnumerable<TaskModel>> GetHotTAsks(int userId)
+    {
+        return null;
+    }
+
     public async Task<IEnumerable<TaskModel>> GetUserTasks(int userId)
     {
         var tasks = await _dbContext.Tasks
