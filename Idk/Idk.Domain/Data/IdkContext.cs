@@ -10,8 +10,6 @@ namespace Idk.Domain.Data
         public DbSet<Subject> Subjects { get; set; }
         public IdkContext(DbContextOptions<IdkContext> options)
             : base(options)
-        {
-            Database.EnsureCreated();
-        }
+        {   }
     }
 }
