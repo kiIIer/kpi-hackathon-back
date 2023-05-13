@@ -1,7 +1,7 @@
 ﻿using Idk.Domain.Model;
 using Idk.Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using Task = Idk.Domain.Models.Task;
+using Task = System.Threading.Tasks.Task;
 
 namespace Idk.Domain.Data
 {

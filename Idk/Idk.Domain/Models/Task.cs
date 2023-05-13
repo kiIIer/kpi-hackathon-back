@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Idk.Domain.Model;
 using TaskStatus = Idk.Domain.Model.TaskStatus;
 
 namespace Idk.Domain.Models
