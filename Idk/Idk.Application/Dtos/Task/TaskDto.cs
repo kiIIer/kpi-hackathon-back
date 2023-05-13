@@ -1,13 +1,12 @@
-﻿using Idk.Application.Dtos.Enums;
-
+﻿using TaskStatus = Idk.Domain.Model.TaskStatus;
 namespace Idk.Application.Dtos.Task;
 
 public class TaskDto
 {
     public string Name { get; set; }
-    public int? SubjectId { get; set; }
-    public DateTime Deadline { get; set; }
+    public DateTime? Deadline { get; set; }
     public string? Description { get; set; }
-    public float MaxGrade { get; set; }
-    public Status Status { get; set; } = Status.ToDo;
+    public string? Theme { get; set; }
+    public float Grade { get; set; }
+    public TaskStatus Status { get; set; } = TaskStatus.ToDo;
 }
