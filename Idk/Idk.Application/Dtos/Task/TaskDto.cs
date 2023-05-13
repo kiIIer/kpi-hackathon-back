@@ -1,6 +1,6 @@
-﻿using Idk.Domain.Dtos.Enums;
+﻿using Idk.Application.Dtos.Enums;
 
-namespace Idk.Domain.Dtos.Task;
+namespace Idk.Application.Dtos.Task;
 
 public class TaskDto
 {

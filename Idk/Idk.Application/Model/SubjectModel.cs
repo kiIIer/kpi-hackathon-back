@@ -1,6 +1,6 @@
-﻿using Idk.Domain.Dtos.Subjects;
+﻿using Idk.Application.Dtos.Subjects;
 
-namespace Idk.Domain.Model;
+namespace Idk.Application.Model;
 
 public class SubjectModel : SubjectDto
 {

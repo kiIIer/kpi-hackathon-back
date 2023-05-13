@@ -1,4 +1,4 @@
-﻿namespace Idk.Domain.Dtos.Subjects;
+﻿namespace Idk.Application.Dtos.Subjects;
 
 public class SubjectDto
 {

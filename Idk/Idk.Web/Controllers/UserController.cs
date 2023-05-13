@@ -1,4 +1,4 @@
-﻿using Idk.Domain.Model;
+﻿using Idk.Application.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Idk.Web.Controllers;

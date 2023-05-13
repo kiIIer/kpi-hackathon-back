@@ -1,4 +1,4 @@
-﻿namespace Idk.Domain.Model;
+﻿namespace Idk.Application.Model;
 
 public class UserModel
 {

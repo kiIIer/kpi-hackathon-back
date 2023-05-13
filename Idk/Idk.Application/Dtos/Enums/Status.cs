@@ -1,4 +1,4 @@
-﻿namespace Idk.Domain.Dtos.Enums;
+﻿namespace Idk.Application.Dtos.Enums;
 
 public enum Status
 {
