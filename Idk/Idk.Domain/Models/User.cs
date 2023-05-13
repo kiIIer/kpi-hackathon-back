@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using Idk.Domain.Models;
 
 namespace Idk.Domain.Model
 {
@@ -16,6 +17,6 @@ namespace Idk.Domain.Model
         public string Email { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
-        public ICollection<Subject> Subjects { get; set; }
+        public ICollection<Subject>? Subjects { get; set; } = new List<Subject>();
     }
 }
