@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Security.Claims;
+using Idk.Web.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -64,7 +65,7 @@ builder.Services.AddAuthentication(options =>
 });
 
 var app = builder.Build();
-
+app.UseCustomExceptionHandler();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
