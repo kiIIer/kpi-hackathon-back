@@ -38,4 +38,12 @@ public class SubjectMapper : ISubjectMapper
             Tasks = source.Tasks == null ? new List<TaskModel>() : source.Tasks.Select(_taskMapper.Map)
         };
     }
+
+    public void Map(SubjectDto source, Domain.Models.Subject destination)
+    {
+        destination.Name = source.Name;
+        destination.Description = source.Description;
+        destination.Deadline = source.Deadline;
+        destination.MaxGrade = source.MaxGrade;
+    }
 }
