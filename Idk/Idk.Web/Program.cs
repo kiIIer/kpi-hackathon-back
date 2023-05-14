@@ -58,7 +58,16 @@ builder.Services.AddDbContext<IdkContext>((o) =>
 {
     o.UseSqlServer(builder.Configuration.GetConnectionString("Local"));
 });
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("ApplyAll", policyBuilder =>
+    {
+        policyBuilder.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowAnyOrigin();
+    });
+});
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -93,7 +102,7 @@ catch (Exception e)
     Console.WriteLine(e);
 }
 app.UseHttpsRedirection();
-
+app.UseCors("ApplyAll");
 app.UseAuthentication();
 app.UseAuthorization();
 
