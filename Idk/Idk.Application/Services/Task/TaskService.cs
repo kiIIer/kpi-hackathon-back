@@ -74,7 +74,7 @@ public class TaskService : ITaskService
         return _taskMapper.Map(taskToAdd);
     }
 
-    public async Task<TaskModel> UpdateTask(int? subjectId, string userId, int id, TaskDto dto)
+    public async Task<TaskModel> UpdateTask(int? subjectId, string userId, int id, UpdateTaskDto dto)
     {
         var task = await _dbContext.Tasks
             .FirstOrDefaultAsync(t => t.Id == id && t.SubjectId == subjectId && t.UserId == userId);
@@ -83,7 +83,19 @@ public class TaskService : ITaskService
             throw new EntityNotFoundException(nameof(Domain.Models.Task), id);
         }
 
-        _taskMapper.Map(subjectId, dto, task);
+        if (dto.SubjectId is null)
+        {
+            _taskMapper.Map(dto, task);
+            await _dbContext.SaveChangesAsync();
+            return _taskMapper.Map(task);
+        }
+        var subject = await _dbContext.Subjects
+            .FirstOrDefaultAsync(s => s.Id == dto.SubjectId && s.UserId == userId);
+        if (subject is null)
+        {
+            throw new EntityNotFoundException(nameof(Domain.Models.Subject), dto.SubjectId!.Value);
+        }
+        _taskMapper.Map(dto, task);
         await _dbContext.SaveChangesAsync();
         return _taskMapper.Map(task);
     }
