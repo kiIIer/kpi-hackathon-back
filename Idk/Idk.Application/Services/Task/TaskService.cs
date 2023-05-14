@@ -1,4 +1,5 @@
-﻿using Idk.Application.Dependencies;
+﻿using FluentValidation;
+using Idk.Application.Dependencies;
 using Idk.Application.Dtos.Task;
 using Idk.Application.Exceptions.Common;
 using Idk.Application.Mapper.Task;
@@ -13,11 +14,13 @@ public class TaskService : ITaskService
 {
     private readonly IdkContext _dbContext;
     private readonly ITaskMapper _taskMapper;
+    private readonly IValidator<TaskDto> _validator;
 
-    public TaskService(IdkContext dbContext, ITaskMapper taskMapper)
+    public TaskService(IdkContext dbContext, ITaskMapper taskMapper, IValidator<TaskDto> validator)
     {
         _dbContext = dbContext;
         _taskMapper = taskMapper;
+        _validator = validator;
     }
 
     public async Task<TaskModel> GetTaskById(int? subjectId, string userId, int id)
