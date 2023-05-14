@@ -59,7 +59,7 @@ public class TaskController : BaseController
     [Authorize]
     [HttpPut("tasks/{id:int}")]
     [HttpPut("subjects/{subjectId:int}/tasks/{id:int}")]
-    public async Task<TaskModel> UpdateTask(int? subjectId, int id, TaskDto dto)
+    public async Task<TaskModel> UpdateTask(int? subjectId, int id, UpdateTaskDto dto)
     {
         return await _taskService.UpdateTask(subjectId, UserId, id, dto);
     }

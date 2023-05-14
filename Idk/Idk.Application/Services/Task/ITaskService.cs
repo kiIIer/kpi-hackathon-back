@@ -10,6 +10,6 @@ public interface ITaskService
     Task<IEnumerable<TaskModel>> GetTasksBySubjectId(int subjectId, string userId);
     Task<IEnumerable<TaskModel>> GetUserTasks(string userId);
     Task<TaskModel> CreateTask(int? subjectId, string userId, TaskDto dto);
-    Task<TaskModel> UpdateTask(int? subjectId, string userId, int id, TaskDto dto);
+    Task<TaskModel> UpdateTask(int? subjectId, string userId, int id, UpdateTaskDto dto);
     System.Threading.Tasks.Task DeleteTaskById(int? subjectId, string userId, int id);
 }

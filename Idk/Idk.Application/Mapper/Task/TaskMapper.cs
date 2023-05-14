@@ -22,15 +22,15 @@ public class TaskMapper : ITaskMapper
         };
     }
 
-    public void Map(int? subjectId, TaskDto source, Domain.Models.Task destination)
+    public void Map(UpdateTaskDto source, Domain.Models.Task destination)
     {
         destination.Name = source.Name;
-        destination.SubjectId = subjectId;
         destination.Description = source.Description;
         destination.Deadline = source.Deadline;
         destination.Grade = source.Grade;
         destination.Theme = source.Theme;
         destination.Status = source.Status;
+        destination.SubjectId = source.SubjectId;
     }
 
     public TaskModel Map(Domain.Models.Task source)
