@@ -1,6 +1,6 @@
 ﻿using Idk.Application.Dtos.Task;
 
-namespace Idk.Application.Model;
+namespace Idk.Application.Models;
 
 public class TaskModel : TaskDto
 {

@@ -2,7 +2,7 @@
 using Idk.Application.Dtos.Task;
 using Idk.Application.Exceptions.Common;
 using Idk.Application.Mapper.Task;
-using Idk.Application.Model;
+using Idk.Application.Models;
 using Idk.Domain.Data;
 using Idk.Domain.Models;
 using Microsoft.EntityFrameworkCore;
@@ -20,7 +20,7 @@ public class TaskService : ITaskService
         _taskMapper = taskMapper;
     }
 
-    public async Task<TaskModel> GetTaskById(int? subjectId, int userId, int id)
+    public async Task<TaskModel> GetTaskById(int? subjectId, string userId, int id)
     {
         var task = await _dbContext.Tasks
             .FirstOrDefaultAsync(t => t.Id == id && t.SubjectId == subjectId && t.UserId == userId);
@@ -32,12 +32,12 @@ public class TaskService : ITaskService
         return _taskMapper.Map(task);
     }
 
-    public Task<IEnumerable<TaskModel>> GetHotTAsks(int userId)
+    public Task<IEnumerable<TaskModel>> GetHotTAsks(string userId)
     {
         return null;
     }
 
-    public async Task<IEnumerable<TaskModel>> GetTasksBySubjectId(int subjectId, int userId)
+    public async Task<IEnumerable<TaskModel>> GetTasksBySubjectId(int subjectId, string userId)
     {
         var subject = await _dbContext.Subjects
             .Include(s => s.Tasks)
@@ -49,7 +49,7 @@ public class TaskService : ITaskService
         return subject.Tasks!.Select(_taskMapper.Map);
     }
 
-    public async Task<IEnumerable<TaskModel>> GetUserTasks(int userId)
+    public async Task<IEnumerable<TaskModel>> GetUserTasks(string userId)
     {
         var tasks = await _dbContext.Tasks
             .Where(t => t.UserId == userId)
@@ -57,7 +57,7 @@ public class TaskService : ITaskService
         return tasks.Select(_taskMapper.Map);
     }
 
-    public async Task<TaskModel> CreateTask(int? subjectId, int userId, TaskDto dto)
+    public async Task<TaskModel> CreateTask(int? subjectId, string userId, TaskDto dto)
     {
         if (subjectId is not null)
         {
@@ -73,7 +73,7 @@ public class TaskService : ITaskService
         return _taskMapper.Map(taskToAdd);
     }
 
-    public async Task<TaskModel> UpdateTask(int? subjectId, int userId, int id, TaskDto dto)
+    public async Task<TaskModel> UpdateTask(int? subjectId, string userId, int id, TaskDto dto)
     {
         var task = await _dbContext.Tasks
             .FirstOrDefaultAsync(t => t.Id == id && t.SubjectId == subjectId && t.UserId == userId);
@@ -87,7 +87,7 @@ public class TaskService : ITaskService
         return _taskMapper.Map(task);
     }
 
-    public async System.Threading.Tasks.Task DeleteTaskById(int? subjectId, int userId, int id)
+    public async System.Threading.Tasks.Task DeleteTaskById(int? subjectId, string userId, int id)
     {
         var task = await _dbContext.Tasks
             .FirstOrDefaultAsync(t => t.Id == id && t.SubjectId == subjectId && t.UserId == userId);

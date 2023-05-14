@@ -4,5 +4,6 @@ namespace Idk.Web.Controllers;
 
 public class BaseController : ControllerBase
 {
-    protected int UserId => 3;
+    public string UserId => base.HttpContext.User.Identity?.Name 
+        ?? throw new ArgumentNullException(nameof(base.HttpContext.User.Identity));
 }

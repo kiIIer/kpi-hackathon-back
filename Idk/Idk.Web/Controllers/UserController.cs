@@ -1,15 +1,18 @@
-﻿using Idk.Application.Model;
+﻿using Azure.Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Idk.Web.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class UserController
+public class UserController : BaseController
 {
     [HttpGet]
-    public async Task<UserModel> WhoIAm()
+    [Authorize]
+    public async Task<string> GetUserId()
     {
-        return null;
+        return UserId;
     }
 }

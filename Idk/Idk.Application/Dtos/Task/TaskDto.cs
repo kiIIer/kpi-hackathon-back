@@ -1,4 +1,4 @@
-﻿using TaskStatus = Idk.Domain.Model.TaskStatus;
+﻿using TaskStatus = Idk.Domain.Models.TaskStatus;
 namespace Idk.Application.Dtos.Task;
 
 public class TaskDto

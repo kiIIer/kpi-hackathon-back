@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Idk.Domain.Model;
 using Task = Idk.Domain.Models.Task;
 
 namespace Idk.Domain.Models
@@ -14,8 +13,7 @@ namespace Idk.Domain.Models
         public string? Description { get; set; }
         public float MaxGrade { get; set; }
         public DateTime Deadline { get; set; }
-        public User? User { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public ICollection<Task>? Tasks { get; set; } = new List<Task>();
     }
 }
