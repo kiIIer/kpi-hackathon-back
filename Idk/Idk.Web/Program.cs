@@ -56,7 +56,7 @@ builder.Services.AddSwaggerGen(option =>
 
 builder.Services.AddDbContext<IdkContext>((o) =>
 {
-    o.UseSqlServer(builder.Configuration.GetConnectionString("Local"));
+    o.UseInMemoryDatabase("test");
 });
 
 builder.Services.AddAuthentication(options =>

@@ -13,7 +13,7 @@ namespace Idk.Domain.Data
 
         public IdkContext()
         {
-            //Database.EnsureCreated();
+            Database.EnsureCreated();
         }
     }
 }
