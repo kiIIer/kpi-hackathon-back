@@ -7,4 +7,5 @@ public interface ISubjectMapper
 {
     Domain.Models.Subject Map(SubjectDto source, string userId);
     SubjectModel Map(Domain.Models.Subject source);
+    void Map(SubjectDto source, Domain.Models.Subject destination);
 }

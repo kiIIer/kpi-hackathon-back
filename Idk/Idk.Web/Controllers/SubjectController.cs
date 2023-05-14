@@ -1,45 +1,50 @@
-﻿using Idk.Application.Models;
-using Microsoft.AspNetCore.Authorization;
+﻿using Idk.Application.Dtos.Subjects;
+using Idk.Application.Model;
+using Idk.Application.Services.Subject;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Idk.Web.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class SubjectController : ControllerBase
+public class SubjectController : BaseController
 {
+    private readonly ISubjectService _subjectService;
+
+    public SubjectController(ISubjectService subjectService)
+    {
+        _subjectService = subjectService;
+    }
+
     [HttpGet("{id:int}")]
     [Authorize]
     public async Task<SubjectModel> GetSubjectById(int id)
     {
-        return null;
+        return await _subjectService.GetSubjectById(id, UserId);
     }
 
     [HttpGet]
     [Authorize]
     public async Task<IEnumerable<SubjectModel>> GetUserSubjects()
     {
-        return null;
+        return await _subjectService.GetUserSubjects(UserId);
     }
 
     [HttpPost]
-    [Authorize]
-    public async Task<SubjectModel> CreateSubject()
+    public async Task<SubjectModel> CreateSubject(SubjectDto dto)
     {
-        return null;
+        return await _subjectService.CreateSubject(dto, UserId);
     }
 
     [HttpPut("{id:int}")]
-    [Authorize]
-    public async Task<SubjectModel> UpdateSubject(int id)
+    public async Task<SubjectModel> UpdateSubject(int id, SubjectDto dto)
     {
-        return null;
+        return await _subjectService.UpdateSubject(id, dto, UserId);
     }
 
     [HttpDelete("{id:int}")]
-    [Authorize]
-    public async Task DeleteSubject()
+    public async Task DeleteSubjectById(int id)
     {
-        
+        await _subjectService.DeleteSubjectById(id, UserId);
     }
 }
