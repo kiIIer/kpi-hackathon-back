@@ -1,4 +1,9 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using Idk.Application.Dtos.Subjects;
+using Idk.Application.Dtos.Task;
 using Idk.Application.Mapper.Subject;
+using Idk.Application.Validation;
 using Idk.Domain.Data;
 using Idk.Domain.Models;
 using Idk.Web.Dependencies;
@@ -14,9 +19,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddFluentValidationAutoValidation();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.Register();
+builder.Services.AddScoped<IValidator<TaskDto>, TaskDtoValidator>();
+builder.Services.AddScoped<IValidator<SubjectDto>, SubjectDtoValidator>();
+
 builder.Services.AddSwaggerGen(option =>
 {
     option.SwaggerDoc("v1", new OpenApiInfo { Title = "Idk-backend", Version = "v1" });

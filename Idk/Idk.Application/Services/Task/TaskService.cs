@@ -1,4 +1,5 @@
-﻿using Idk.Application.Dependencies;
+﻿using FluentValidation;
+using Idk.Application.Dependencies;
 using Idk.Application.Dtos.Task;
 using Idk.Application.Exceptions.Common;
 using Idk.Application.Mapper.Task;
