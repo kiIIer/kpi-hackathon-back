@@ -1,4 +1,4 @@
-﻿namespace Idk.Domain.Model
+﻿namespace Idk.Domain.Models
 {
     public enum TaskStatus
     {

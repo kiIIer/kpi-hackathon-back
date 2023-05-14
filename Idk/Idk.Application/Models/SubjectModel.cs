@@ -1,6 +1,6 @@
 ﻿using Idk.Application.Dtos.Subjects;
 
-namespace Idk.Application.Model;
+namespace Idk.Application.Models;
 
 public class SubjectModel : SubjectDto
 {

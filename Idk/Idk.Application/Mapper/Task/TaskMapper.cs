@@ -1,13 +1,13 @@
 ﻿using Idk.Application.Dependencies;
 using Idk.Application.Dtos.Task;
-using Idk.Application.Model;
+using Idk.Application.Models;
 
 namespace Idk.Application.Mapper.Task;
 
 [DefaultTransientImplementation]
 public class TaskMapper : ITaskMapper
 {
-    public Domain.Models.Task Map(int? subjectId, int userId, TaskDto source)
+    public Domain.Models.Task Map(int? subjectId, string userId, TaskDto source)
     {
         return new Domain.Models.Task
         {

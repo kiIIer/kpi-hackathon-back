@@ -1,4 +1,4 @@
-﻿using Idk.Application.Model;
+﻿using Idk.Application.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

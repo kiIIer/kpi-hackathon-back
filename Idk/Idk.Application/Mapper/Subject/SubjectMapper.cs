@@ -1,7 +1,7 @@
 ﻿using Idk.Application.Dependencies;
 using Idk.Application.Dtos.Subjects;
 using Idk.Application.Mapper.Task;
-using Idk.Application.Model;
+using Idk.Application.Models;
 
 namespace Idk.Application.Mapper.Subject;
 [DefaultTransientImplementation]
@@ -14,7 +14,7 @@ public class SubjectMapper : ISubjectMapper
         _taskMapper = taskMapper;
     }
 
-    public Domain.Models.Subject Map(SubjectDto source, int userId)
+    public Domain.Models.Subject Map(SubjectDto source, string userId)
     {
         return new Domain.Models.Subject
         {
