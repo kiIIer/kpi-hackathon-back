@@ -14,13 +14,11 @@ public class TaskService : ITaskService
 {
     private readonly IdkContext _dbContext;
     private readonly ITaskMapper _taskMapper;
-    private readonly IValidator<TaskDto> _validator;
 
-    public TaskService(IdkContext dbContext, ITaskMapper taskMapper, IValidator<TaskDto> validator)
+    public TaskService(IdkContext dbContext, ITaskMapper taskMapper)
     {
         _dbContext = dbContext;
         _taskMapper = taskMapper;
-        _validator = validator;
     }
 
     public async Task<TaskModel> GetTaskById(int? subjectId, string userId, int id)
