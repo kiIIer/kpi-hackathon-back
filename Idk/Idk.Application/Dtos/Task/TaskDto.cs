@@ -3,6 +3,7 @@ namespace Idk.Application.Dtos.Task;
 
 public class TaskDto
 {
+    public int? SubjectId { get; set; }
     public string Name { get; set; }
     public DateTime? Deadline { get; set; }
     public string? Description { get; set; }

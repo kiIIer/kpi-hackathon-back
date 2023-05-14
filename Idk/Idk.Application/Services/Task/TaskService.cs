@@ -1,11 +1,9 @@
-﻿using FluentValidation;
-using Idk.Application.Dependencies;
+﻿using Idk.Application.Dependencies;
 using Idk.Application.Dtos.Task;
 using Idk.Application.Exceptions.Common;
 using Idk.Application.Mapper.Task;
 using Idk.Application.Models;
 using Idk.Domain.Data;
-using Idk.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Idk.Application.Services.Task;
@@ -21,10 +19,10 @@ public class TaskService : ITaskService
         _taskMapper = taskMapper;
     }
 
-    public async Task<TaskModel> GetTaskById(int? subjectId, string userId, int id)
+    public async Task<TaskModel> GetTaskById(string userId, int id)
     {
         var task = await _dbContext.Tasks
-            .FirstOrDefaultAsync(t => t.Id == id && t.SubjectId == subjectId && t.UserId == userId);
+            .FirstOrDefaultAsync(t => t.Id == id && t.UserId == userId);
         if (task is null)
         {
             throw new EntityNotFoundException(nameof(Domain.Models.Task), id);
@@ -58,26 +56,26 @@ public class TaskService : ITaskService
         return tasks.Select(_taskMapper.Map);
     }
 
-    public async Task<TaskModel> CreateTask(int? subjectId, string userId, TaskDto dto)
+    public async Task<TaskModel> CreateTask(string userId, TaskDto dto)
     {
-        if (subjectId is not null)
+        if (dto.SubjectId is not null)
         {
-            var subject = await _dbContext.Subjects.FirstOrDefaultAsync(s => s.UserId == userId && s.Id == subjectId);
+            var subject = await _dbContext.Subjects.FirstOrDefaultAsync(s => s.UserId == userId && s.Id == dto.SubjectId);
             if (subject is null)
             {
-                throw new EntityNotFoundException(nameof(Subject), subjectId.Value);
+                throw new EntityNotFoundException(nameof(Subject), dto.SubjectId.Value);
             }
         }
-        var taskToAdd = _taskMapper.Map(subjectId, userId, dto);
+        var taskToAdd = _taskMapper.Map(userId, dto);
         await _dbContext.Tasks.AddAsync(taskToAdd);
         await _dbContext.SaveChangesAsync();
         return _taskMapper.Map(taskToAdd);
     }
 
-    public async Task<TaskModel> UpdateTask(int? subjectId, string userId, int id, UpdateTaskDto dto)
+    public async Task<TaskModel> UpdateTask(string userId, int id, TaskDto dto)
     {
         var task = await _dbContext.Tasks
-            .FirstOrDefaultAsync(t => t.Id == id && t.SubjectId == subjectId && t.UserId == userId);
+            .FirstOrDefaultAsync(t => t.Id == id && t.UserId == userId);
         if (task is null)
         {
             throw new EntityNotFoundException(nameof(Domain.Models.Task), id);
@@ -100,10 +98,10 @@ public class TaskService : ITaskService
         return _taskMapper.Map(task);
     }
 
-    public async System.Threading.Tasks.Task DeleteTaskById(int? subjectId, string userId, int id)
+    public async System.Threading.Tasks.Task DeleteTaskById(string userId, int id)
     {
         var task = await _dbContext.Tasks
-            .FirstOrDefaultAsync(t => t.Id == id && t.SubjectId == subjectId && t.UserId == userId);
+            .FirstOrDefaultAsync(t => t.Id == id && t.UserId == userId);
         if (task is null)
         {
             throw new EntityNotFoundException(nameof(Domain.Models.Task), id);
