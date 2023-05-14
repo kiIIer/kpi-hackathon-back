@@ -28,6 +28,12 @@ public class TaskController : BaseController
     {
         return await _taskService.GetHotTAsks(UserId);
     }
+
+    [HttpGet("subjects/{subjectId:int}/tasks")]
+    public async Task<IEnumerable<TaskModel>> GetTasksBySubjectId(int subjectId)
+    {
+        return await _taskService.GetTasksBySubjectId(subjectId, UserId);
+    }
     [HttpGet("tasks")]
     public async Task<IEnumerable<TaskModel>> GetUserTasks()
     {

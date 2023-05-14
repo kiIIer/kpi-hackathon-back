@@ -37,6 +37,18 @@ public class TaskService : ITaskService
         return null;
     }
 
+    public async Task<IEnumerable<TaskModel>> GetTasksBySubjectId(int subjectId, int userId)
+    {
+        var subject = await _dbContext.Subjects
+            .Include(s => s.Tasks)
+            .FirstOrDefaultAsync(s => s.Id == subjectId && s.UserId == userId);
+        if (subject is null)
+        {
+            throw new EntityNotFoundException(nameof(Subject), subjectId);
+        }
+        return subject.Tasks!.Select(_taskMapper.Map);
+    }
+
     public async Task<IEnumerable<TaskModel>> GetUserTasks(int userId)
     {
         var tasks = await _dbContext.Tasks
