@@ -2,7 +2,7 @@
 using Idk.Application.Dtos.Subjects;
 using Idk.Application.Exceptions.Common;
 using Idk.Application.Mapper.Subject;
-using Idk.Application.Model;
+using Idk.Application.Models;
 using Idk.Domain.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,13 +20,13 @@ public class SubjectService : ISubjectService
         _subjectMapper = subjectMapper;
     }
 
-    public async Task<SubjectModel> GetSubjectById(int id, int userId)
+    public async Task<SubjectModel> GetSubjectById(int id, string userId)
     {
         var subject = await GetSubject(id, userId);
         return _subjectMapper.Map(subject);
     }
 
-    public async Task<IEnumerable<SubjectModel>> GetUserSubjects(int userId)
+    public async Task<IEnumerable<SubjectModel>> GetUserSubjects(string userId)
     {
         var subjects = await _dbContext.Subjects
             .Where(s => s.UserId == userId)
@@ -34,7 +34,7 @@ public class SubjectService : ISubjectService
         return subjects.Select(_subjectMapper.Map);
     }
 
-    public async Task<SubjectModel> CreateSubject(SubjectDto dto, int userId)
+    public async Task<SubjectModel> CreateSubject(SubjectDto dto, string userId)
     {
         var subject = _subjectMapper.Map(dto, userId);
         await _dbContext.Subjects.AddAsync(subject);
@@ -42,7 +42,7 @@ public class SubjectService : ISubjectService
         return _subjectMapper.Map(subject);
     }
 
-    public async Task<SubjectModel> UpdateSubject(int id, SubjectDto dto, int userId)
+    public async Task<SubjectModel> UpdateSubject(int id, SubjectDto dto, string userId)
     {
         var subject = await GetSubject(id, userId);
         _subjectMapper.Map(dto, subject);
@@ -50,14 +50,14 @@ public class SubjectService : ISubjectService
         return _subjectMapper.Map(subject);
     }
 
-    public async System.Threading.Tasks.Task DeleteSubjectById(int id, int userId)
+    public async System.Threading.Tasks.Task DeleteSubjectById(int id, string userId)
     {
         var subject = await GetSubject(id, userId);
         _dbContext.Subjects.Remove(subject);
         await _dbContext.SaveChangesAsync();
     }
 
-    private async Task<Domain.Models.Subject> GetSubject(int id, int userId)
+    private async Task<Domain.Models.Subject> GetSubject(int id, string userId)
     {
         var subject = await _dbContext.Subjects
             .FirstOrDefaultAsync(s => s.Id == id && s.UserId == userId);

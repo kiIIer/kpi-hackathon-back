@@ -32,12 +32,12 @@ public class TaskService : ITaskService
         return _taskMapper.Map(task);
     }
 
-    public Task<IEnumerable<TaskModel>> GetHotTAsks(int userId)
+    public Task<IEnumerable<TaskModel>> GetHotTAsks(string userId)
     {
         return null;
     }
 
-    public async Task<IEnumerable<TaskModel>> GetTasksBySubjectId(int subjectId, int userId)
+    public async Task<IEnumerable<TaskModel>> GetTasksBySubjectId(int subjectId, string userId)
     {
         var subject = await _dbContext.Subjects
             .Include(s => s.Tasks)
@@ -49,7 +49,7 @@ public class TaskService : ITaskService
         return subject.Tasks!.Select(_taskMapper.Map);
     }
 
-    public async Task<IEnumerable<TaskModel>> GetUserTasks(int userId)
+    public async Task<IEnumerable<TaskModel>> GetUserTasks(string userId)
     {
         var tasks = await _dbContext.Tasks
             .Where(t => t.UserId == userId)

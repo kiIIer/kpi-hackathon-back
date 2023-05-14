@@ -25,17 +25,23 @@ public class TaskController : BaseController
         return await _taskService.GetTaskById(subjectId, UserId, id);
     }
 
+
+    [Authorize]
     [HttpGet("tasks/hot")]
     public async Task<IEnumerable<TaskModel>> GetHotTasks()
     {
         return await _taskService.GetHotTAsks(UserId);
     }
 
+
+    [Authorize]
     [HttpGet("subjects/{subjectId:int}/tasks")]
     public async Task<IEnumerable<TaskModel>> GetTasksBySubjectId(int subjectId)
     {
         return await _taskService.GetTasksBySubjectId(subjectId, UserId);
     }
+
+    [Authorize]
     [HttpGet("tasks")]
     public async Task<IEnumerable<TaskModel>> GetUserTasks()
     {
