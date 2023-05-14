@@ -15,37 +15,36 @@ public class TaskController : BaseController
     {
         _taskService = taskService;
     }
-    [HttpGet("{id:int}")]
-    [Authorize]
-    public async Task<TaskModel> GetTaskById(int id)
+    [HttpGet("tasks/{id:int}")]
+    [HttpGet("subjects/{subjectId:int}/tasks/{id:int}")]
+    public async Task<TaskModel> GetTaskById(int? subjectId, int id)
     {
         return await _taskService.GetTaskById(subjectId, UserId, id);
     }
 
-    [HttpGet]
-    [Authorize]
+    [HttpGet("tasks")]
     public async Task<IEnumerable<TaskModel>> GetUserTasks()
     {
         return await _taskService.GetUserTasks(UserId);
     }
 
-    [HttpPost]
-    [Authorize]
-    public async Task<TaskModel> CreateTask()
+    [HttpPost("tasks")]
+    [HttpPost("subjects/{subjectId:int}/tasks")]
+    public async Task<TaskModel> CreateTask(TaskDto dto, int? subjectId)
     {
         return await _taskService.CreateTask(subjectId, UserId, dto);
     }
 
-    [HttpPut("{id:int}")]
-    [Authorize]
-    public async Task<TaskModel> UpdateTask(int id)
+    [HttpPut("tasks/{id:int}")]
+    [HttpPut("subjects/{subjectId:int}/tasks/{id:int}")]
+    public async Task<TaskModel> UpdateTask(int? subjectId, int id, TaskDto dto)
     {
         return await _taskService.UpdateTask(subjectId, UserId, id, dto);
     }
     
-    [HttpDelete("{id:int}")]
-    [Authorize]
-    public async Task DeleteTask(int id)
+    [HttpDelete("tasks/{id:int}")]
+    [HttpDelete("subjects/{subjectId:int}/tasks/{id:int}")]
+    public async Task DeleteTask(int? subjectId, int id)
     {
         await _taskService.DeleteTaskById(subjectId, UserId, id);
     }
